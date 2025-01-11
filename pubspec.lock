@@ -184,6 +184,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  swipe_tab_controller:
+    dependency: "direct main"
+    description:
+      name: swipe_tab_controller
+      sha256: f06f7769ae801261c859592d390d9abbbe98220ebdfd834a12843b3979f0a9d9
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   term_glyph:
     dependency: transitive
     description:

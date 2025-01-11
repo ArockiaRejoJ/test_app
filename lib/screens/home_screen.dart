@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:swipe_tab_controller/swipe_tab_controller.dart';
+import 'package:test_app/widgets/custom_container.dart';
 
 import '../constants/constants.dart';
 import '../widgets/custom_text.dart';
@@ -53,6 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
+  }
+
+  void changeTab(int index) async {
+    setState(() => selectedTabIndex = index);
   }
 
   @override
@@ -218,67 +224,81 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 10.h),
               // Tab navigation menu
               SizedBox(
-                height: 35.h,
-                width: 360.w,
-                child: ListView.builder(
-                  itemCount: _list.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.only(left: 20.w, right: 17.w),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectedTabIndex = index;
-                          if (selectedTabIndex == 2 || selectedTabIndex == 3) {
-                            isChildScrollable = false;
-                          }
-                        });
-                      },
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      child: CustomText(
-                        text: _list[index],
-                        fontWeight: selectedTabIndex == index
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                        textColor: selectedTabIndex == index ? black : grey,
-                        fontSize: 16,
-                      ),
+                height: 605.h,
+                child: DefaultTabController(
+                  length: _list.length,
+                  child: SwipeTabController(
+                    onTabChanged: changeTab,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 35.h,
+                          width: 360.w,
+                          child: TabBar(
+                            indicatorColor: black,
+                            indicatorWeight: _list.length.toDouble(),
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            padding: EdgeInsets.only(left: 20.w),
+                            onTap: changeTab,
+                            tabs: _list
+                                .asMap()
+                                .map(
+                                  (i, tab) => MapEntry(
+                                    i,
+                                    CustomText(
+                                      text: tab,
+                                      fontWeight: selectedTabIndex == i
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                      textColor:
+                                          selectedTabIndex == i ? black : grey,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                )
+                                .values
+                                .toList(),
+                          ),
+                        ),
+                        // Tab-specific content
+                        Container(
+                          height: 570.h,
+                          width: 360.w,
+                          margin: EdgeInsets.symmetric(horizontal: 20.w),
+                          color: Colors.transparent,
+                          child: TabBarView(
+                            children: _list
+                                .asMap()
+                                .map(
+                                  (i, tab) => MapEntry(
+                                    i,
+                                    ListView.builder(
+                                      controller: _childScrollController,
+                                      physics: isChildScrollable
+                                          ? const ScrollPhysics()
+                                          : const NeverScrollableScrollPhysics(),
+                                      itemCount: 10,
+                                      itemBuilder: (context, index) => i == 0
+                                          ? const RidesContainer()
+                                          : i == 1
+                                              ? StoriesContainer(number: index)
+                                              : CustomContainer(
+                                                  number: index,
+                                                  bgColor:
+                                                      i % 2 == 0 ? red : blue,
+                                                  text: tab,
+                                                ),
+                                    ),
+                                  ),
+                                )
+                                .values
+                                .toList(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-              // Tab-specific content
-              Container(
-                height: 570.h,
-                width: 360.w,
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                color: selectedTabIndex == 2
-                    ? red
-                    : selectedTabIndex == 3
-                        ? blue
-                        : Colors.transparent,
-                child: selectedTabIndex == 0 || selectedTabIndex == 1
-                    ? ListView.builder(
-                        controller: _childScrollController,
-                        physics: isChildScrollable
-                            ? const ScrollPhysics()
-                            : const NeverScrollableScrollPhysics(),
-                        itemCount: 10,
-                        itemBuilder: (context, index) => selectedTabIndex == 0
-                            ? const RidesContainer()
-                            : StoriesContainer(
-                                number: index + 1,
-                              ))
-                    : Center(
-                        child: CustomText(
-                          text: _list[selectedTabIndex],
-                          fontWeight: FontWeight.bold,
-                          textColor: black,
-                          fontSize: 16,
-                        ),
-                      ),
               ),
             ],
           ),
