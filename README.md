@@ -1,16 +1,32 @@
-# test_app
+# Arockia Rejo - Test App
 
-A new Flutter project.
+## HomeScreen UI with Nested Scrolling
 
-## Getting Started
+This Flutter project demonstrates a responsive and interactive Home Screen UI featuring nested scrolling, tab navigation, and dynamic widgets such as Rides, Stories, Market, and Garage.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
+    Dynamic AppBar: Custom gradient AppBar with icons and buttons.
+    Event Banners: Highlighted event sections with an interactive "Register Now" button.
+    Tab Navigation: Switch between different tabs (Riders, Stories, Market, Garage) with dynamic content rendering.
+    Nested Scrolling: Smooth scrolling between parent and child scroll views, with intelligent locking based on the current tab.
+    Custom Widgets: Modular CustomText, RidesContainer, and StoriesContainer widgets for reusable UI components.
+    Responsive Design: Utilizes flutter_screenutil for screen size adaptability.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    
+## Screenshots Overview
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The HomeScreen includes:
+
+    Event Highlights: A visual card for event promotion.
+    Tab-Based Content:
+    Rides: List of ride events.
+    Stories: Placeholder content with dummy text.
+    Market & Garage: Colored placeholders for demonstration.
+
+## Screenshots:
+
+The image shown above represents the following views:
+
+![InShot_20250103_235804824](https://github.com/user-attachments/assets/681b99a5-0dfc-499a-985c-8669f58c5038)
+
