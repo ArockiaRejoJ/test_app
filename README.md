@@ -28,5 +28,6 @@ The HomeScreen includes:
 
 The image shown above represents the following views:
 
-![InShot_20250103_235804824](https://github.com/user-attachments/assets/681b99a5-0dfc-499a-985c-8669f58c5038)
+![output-2](https://github.com/user-attachments/assets/be9d16d5-1217-4d8e-ad7b-23da541fb173)
+
 
